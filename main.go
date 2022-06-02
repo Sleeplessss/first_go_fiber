@@ -12,10 +12,15 @@ import (
 )
 
 func setupRoutes(app *fiber.App)  {
-	app.Get("/api/v1/book", controllers.GetBooks)
-	app.Get("/api/v1/book/:id", controllers.GetBook)
-	app.Post("/api/v1/book", controllers.NewBook)
-	app.Delete("/api/v1/book/:id", controllers.DeleteBook)
+
+	//	Grouping Routes
+	api := app.Group("/api")
+	v1 := api.Group("/v1") 
+
+	v1.Get("/book", controllers.GetBooks)
+	v1.Get("/book/:id", controllers.GetBook)
+	v1.Post("/book", controllers.NewBook)
+	v1.Delete("/book/:id", controllers.DeleteBook)
 }
 
 func initDatabase()  {
